@@ -13,7 +13,7 @@ export default function(props) {
             const res = await fetch("/api/pokemons");
             res
                 .json()
-                .then(data => settradeList(data))
+                .then(data => setTradeList(data))
                 .catch(err => console.log(err))
         }    
         fetchData();   
@@ -53,7 +53,7 @@ export default function(props) {
         <React.Fragment>
         <div>
             <SearchPokemon/>
-        <div className = "pokemons">
+        <div className = "trades">
             {tradeElements}
         </div>
         
