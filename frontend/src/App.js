@@ -5,6 +5,9 @@ import NavBar from './Components/NavBar';
 import Home from './Components/Home';
 
 import './App.css';
+import Pokemonlist from './Components/Pokemonlist';
+import MakeCard from './Components/MakeCard'
+
 
 function App() {
   return (
@@ -12,6 +15,8 @@ function App() {
       <NavBar />
       <Switch>
         <Route exact path="/" component={Home} />
+        <Route exact path="/Pokemonlist" component={Pokemonlist} />
+        <Route exact path="/Card" component={MakeCard} />
       </Switch>
     </Router>
   );

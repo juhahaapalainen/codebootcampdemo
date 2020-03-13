@@ -1,0 +1,37 @@
+[
+    {
+        "id": 1, 
+        "pokemon": "Torkoal" , 
+        "user": "User1"
+    },
+    {
+        "id": 2, 
+        "pokemon": "Heracross", 
+        "user": "User2"
+    },
+    {
+        "id": 3, 
+        "pokemon": "Torkoal", 
+        "user": "User3"
+    },
+    {
+        "id": 4, 
+        "pokemon": "Heracross", 
+        "user": "User3"
+    },
+    {
+        "id": 5, 
+        "pokemon": "Heracross", 
+        "user": "User1"
+    },
+    {
+        "id": 6, 
+        "pokemon": "Relicanth", 
+        "user": "User1"
+    },
+    {
+        "id": 7, 
+        "pokemon": "Carnivine", 
+        "user": "User3"
+    }
+]

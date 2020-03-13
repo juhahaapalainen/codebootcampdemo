@@ -1,0 +1,15 @@
+.pokemon {
+    background-color: white;
+    margin: 20px;
+    padding: 4px;
+    text-align: center;
+    width: 4.5em;
+    height: 2.2em;
+    float: left;
+  }
+.Torkoal{
+    background-color: green;
+}
+.Relicanth {
+    background-color: blue;
+}

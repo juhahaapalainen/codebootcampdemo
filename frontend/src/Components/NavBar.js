@@ -10,6 +10,12 @@ export default function NavBar(props) {
                 <li>
                     <Link to="/">Home</Link>
                 </li>
+                <li>
+                    <Link to="/Pokemonlist">Search</Link>
+                </li>
+                <li>
+                    <Link to="/Card">Card</Link>
+                </li>
             </ul>
         </div>
     );
