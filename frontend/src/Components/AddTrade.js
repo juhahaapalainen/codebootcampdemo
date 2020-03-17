@@ -35,12 +35,25 @@ render() {
         <React.Fragment>
             <form>
             <div>
-            <label>Search:</label>
+            <label>Käyttäjä</label>
+                    <select 
+                        required
+                        name="type"
+                        onChange={(event) => this.handleInputChange(event)}
+                    >
+                        <option value="" selected disabled hidden>Please select one</option>
+                        <option value="user">User1</option>
+                        <option value="user">User2</option>
+                        <option value="user">User3</option>
+                        
+                    </select>
+            </div>
+            <div>
+            <label>Lisää:</label>
                         <input required name="pokemonName"/>
             </div>
-      
             </form>
-        
+            <button type="submit">Lisää</button>
         
         </React.Fragment>
     );

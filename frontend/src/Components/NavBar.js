@@ -16,6 +16,9 @@ export default function NavBar(props) {
                 <li>
                     <Link to="/Card">Card</Link>
                 </li>
+                <li>
+                    <Link to="/Testi">Testi</Link>
+                </li>
             </ul>
         </div>
     );

@@ -1,8 +1,8 @@
 import React from 'react';
-import "./Home.css"
+
 
 export default function(props) {
     return (
-        <div>Home!</div>
+        <div className={`user ${props.id}`}>{props.user}</div>
     );
 }

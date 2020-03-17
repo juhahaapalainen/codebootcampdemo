@@ -1,6 +1,6 @@
 import React, {useState, useEffectfrom, useEffect} from 'react';
 import Pokemon from './Pokemon'
-import SearchPokemon from './SearchPokemon';
+import AddTrade from './AddTrade';
 import "./Pokemonlist.css"
 
 
@@ -52,7 +52,7 @@ export default function(props) {
     return (
         <React.Fragment>
         <div>
-            <SearchPokemon/>
+            <AddTrade/>
         <div className = "trades">
             {tradeElements}
         </div>
