@@ -8,6 +8,8 @@
     "@testing-library/user-event": "^7.1.2",
     "http-proxy-middleware": "^1.0.1",
     "mdbreact": "^4.25.4",
+    "oakdex-pokedex": "^0.4.5",
+    "oakdex-pokedex-sprites": "0.0.1",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "react-router-dom": "^5.1.2",

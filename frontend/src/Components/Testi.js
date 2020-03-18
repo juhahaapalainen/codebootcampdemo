@@ -3,6 +3,21 @@ import Pokemon from './Pokemon'
 import AddTrade from './AddTrade';
 import "./Pokemonlist.css"
 import User from "./User"
+import oakdexPokedex from "oakdex-pokedex";
+//import oakdexPokedexSprites from 'oakdex-pokedex-sprites';
+//import kuva from './node-modules/oakdexPokedexSprites/icons/001.png'
+
+//oakdexPokedex = require('oakdex-pokedex');
+const pokeDex = oakdexPokedex.allPokemon();
+
+function importAll(r) {
+  let images = {};
+  r.keys().map((item, index) => { images[item.replace('./', '')] = r(item); });
+  return images;
+}
+
+const images = importAll(require.context('../../node_modules/oakdex-pokedex-sprites/icons/', false, /\.png/));
+
 //import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBInput } from 'mdbreact';
 
 /*const FormPage = () => {
@@ -89,13 +104,13 @@ const [tradeList, setTradeList] = useState([]);
     //let pp = tradeList.filter( (ele, ind) => ind === tradeList.findIndex( elem => elem.user === ele.user && elem.id === ele.id))
    // console.log("tradeList: " +tradeList)
     //console.log("tradeListuser: " +tradeList.user)
-    console.log("UsersList: " +uniqueArray);
+    //console.log("UsersList: " +uniqueArray);
    // console.log("pp: " +pp);
-    console.log("kayttaja " +kayttajat);
+    //console.log("kayttaja " +kayttajat);
 
-    console.log("Toimmiiko:" +tradeList.map(kayttajadata => (kayttajadata.user)).sort())
-     
-
+  //  console.log("Toimmiiko:" +tradeList.map(kayttajadata => (kayttajadata.user)).sort())
+   //  console.log("Monnei: " +pokeDex.map(monni => monni.names.en));
+//console.log("Osote: " +'../../node_modules/oakdex-pokedex-sprites/icons/' +pokeDex.map(nmr => nmr.national_id) +'.png');
     return (
         <React.Fragment>
         <div>
@@ -149,9 +164,32 @@ const [tradeList, setTradeList] = useState([]);
             </select>
             </label>
         </div>
+
+        <div>
+          <img src={images['001.png']}/>
+        </div>
+
+       
       
         </React.Fragment>
     );
 
 }       
 //export default FormPage;
+/*
+<div>
+<img
+ src={require('../../node_modules/oakdex-pokedex-sprites/icons/' +pokeDex.map(nmr => nmr.national_id) +'.png')}
+/>
+</div>
+
+<div>
+        
+{
+  images
+  .map(
+    (image,index) => <img key={index} src={image} alt="info"></img>
+  )
+}
+
+</div>*/

@@ -11,7 +11,7 @@ import Testi from './Components/Testi'
 import '@fortawesome/fontawesome-free/css/all.min.css'; 
 import 'bootstrap-css-only/css/bootstrap.min.css'; 
 import 'mdbreact/dist/css/mdb.css';
-
+import Pokedex from './Components/Pokedex'
 function App() {
   return (
     <Router>
@@ -22,6 +22,7 @@ function App() {
         <Route exact path="/Pokemonlist" component={Pokemonlist} />
         <Route exact path="/Card" component={MakeCard} />
         <Route path="/Testi" component={Testi} />
+        <Route path="/Pokedex" component={Pokedex} />
       </Switch>
     </Router>
   );

@@ -19,6 +19,9 @@ export default function NavBar(props) {
                 <li>
                     <Link to="/Testi">Testi</Link>
                 </li>
+                <li>
+                    <Link to="/Pokedex">Pokedex</Link>
+                </li>
             </ul>
         </div>
     );
