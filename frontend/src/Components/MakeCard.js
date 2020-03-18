@@ -66,16 +66,19 @@ state = {
             <div className="row">
             
               <div className="col">
-                <input
+                <Input
                   label="Search trade"
                   icon="search"
                   onChange={this.onchange}
                 />
+                
               </div>
               <div className="col" />
             </div>
             <div className="row">
-              {filteredTrades.map(trade => {
+              {filteredTrades
+              .sort((a,b) => a.user.localeCompare(b.user))
+              .map(trade => {
                 return this.renderTrade(trade);
               })}
             </div>

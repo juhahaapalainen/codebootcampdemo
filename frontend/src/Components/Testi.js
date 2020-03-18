@@ -74,7 +74,7 @@ const [tradeList, setTradeList] = useState([]);
 
    
     
-    const kayttajat = tradeList.map(kayttajadata => (kayttajadata.user))
+    const kayttajat = tradeList.map(kayttajadata => (kayttajadata.user)).sort();
 
     /*const kayttajat = tradeList.map(kayttajadata => {
         return <User
@@ -91,7 +91,11 @@ const [tradeList, setTradeList] = useState([]);
     //console.log("tradeListuser: " +tradeList.user)
     console.log("UsersList: " +uniqueArray);
    // console.log("pp: " +pp);
-    console.log("kayttaja " +kayttajat)
+    console.log("kayttaja " +kayttajat);
+
+    console.log("Toimmiiko:" +tradeList.map(kayttajadata => (kayttajadata.user)).sort())
+     
+
     return (
         <React.Fragment>
         <div>
@@ -105,7 +109,8 @@ const [tradeList, setTradeList] = useState([]);
             <label>
                 Looping through
             <select>
-                {tradeList.map(item => (
+                {tradeList
+                .map(item => (
                     <option key = {item.id} value={item.user}>
                         {item.user}
                     </option>
@@ -124,6 +129,21 @@ const [tradeList, setTradeList] = useState([]);
                         {item}
                     </option>
 
+                ))}
+
+            </select>
+            </label>
+
+            <label>
+                Looping through sorted
+            <select>
+                {tradeList
+                .sort((a,b) => a.user.localeCompare(b.user))
+                .map(item => (
+                    <option key = {item.id} value={item.user}>
+                        {item.user}
+                    </option>
+                
                 ))}
 
             </select>
