@@ -9,14 +9,14 @@ import oakdexPokedex from "oakdex-pokedex";
 
 //oakdexPokedex = require('oakdex-pokedex');
 const pokeDex = oakdexPokedex.allPokemon();
-
+/*
 function importAll(r) {
   let images = {};
   r.keys().map((item, index) => { images[item.replace('./', '')] = r(item); });
   return images;
-}
+}*/
 
-const images = importAll(require.context('../../node_modules/oakdex-pokedex-sprites/icons/', false, /\.png/));
+//const images = importAll(require.context('../assets/img/pokemon_icons', false, /\.png/));
 
 //import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBInput } from 'mdbreact';
 
@@ -166,7 +166,7 @@ const [tradeList, setTradeList] = useState([]);
         </div>
 
         <div>
-          <img src={images['001.png']}/>
+          <img src={require('../assets/img/pokemon_icons/pokemon_icon_000.png')}/>
         </div>
 
        
