@@ -10,7 +10,7 @@ export default function(props) {
 
     useEffect(() => {
         async function fetchData() {
-            const res = await fetch("/api/pokemons");
+            const res = await fetch("/api/trades");
             res
                 .json()
                 .then(data => setTradeList(data))
