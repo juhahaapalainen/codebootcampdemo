@@ -12,6 +12,9 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'bootstrap-css-only/css/bootstrap.min.css'; 
 import 'mdbreact/dist/css/mdb.css';
 import Pokedex from './Components/Pokedex'
+import TradePage from './Components/TradePage'
+import Pokedextesti from './Components/Pokedextesti'
+
 function App() {
   return (
     <Router>
@@ -23,6 +26,8 @@ function App() {
         <Route exact path="/Card" component={MakeCard} />
         <Route path="/Testi" component={Testi} />
         <Route path="/Pokedex" component={Pokedex} />
+        <Route path="/Tradepage" component={TradePage} />
+        <Route path="/Pokedextesti" component={Pokedextesti} />
       </Switch>
     </Router>
   );

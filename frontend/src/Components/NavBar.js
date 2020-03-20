@@ -22,6 +22,12 @@ export default function NavBar(props) {
                 <li>
                     <Link to="/Pokedex">Pokedex</Link>
                 </li>
+                <li>
+                    <Link to="/TradePage">Trade page</Link>
+                </li>
+                <li>
+                    <Link to="/Pokedextesti">Pokedextesti</Link>
+                </li>
             </ul>
         </div>
     );

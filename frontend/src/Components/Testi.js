@@ -166,7 +166,7 @@ const [tradeList, setTradeList] = useState([]);
         </div>
 
         <div>
-          <img src={require('../assets/img/pokemon_icons/pokemon_icon_000.png')}/>
+          <img src='/img/pokemon_icons/pokemon_icon_000.png'/>
         </div>
 
        
