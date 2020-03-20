@@ -11,7 +11,7 @@ import Pokemon from './Pokemon'
 export default function(props) {
     
     const darkPokemon = oakdexPokedex.allPokemon({type: 'Dark'});
-    console.log(darkPokemon.map(monni => monni.names.en));
+   // console.log(darkPokemon.map(monni => monni.names.en));
 
     const pokemonElements = darkPokemon.map(
         pokeData => {
