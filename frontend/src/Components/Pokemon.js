@@ -3,6 +3,7 @@ import "./Pokemon.css"
 
 export default function(props) {
     //console.log("Moro pokemonista url: " +'../assets/img/pokemon_icons/pokemon_icon_' +props.id +'_00.png')
+    
     return (
         <div className={`pokemon card`} >
             <img className="card-img" 
