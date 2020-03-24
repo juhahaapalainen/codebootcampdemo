@@ -26,7 +26,7 @@ function App() {
         <Route exact path="/Card" component={MakeCard} />
         <Route path="/Testi" component={Testi} />
         <Route path="/Pokedex" component={Pokedex} />
-        <Route path="/Tradepage" component={TradePage} />
+        <Route path="/Tradepage"> <TradePage/></Route>  />
         <Route path="/Pokedextesti" component={Pokedextesti} />
       </Switch>
     </Router>

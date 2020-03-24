@@ -74,6 +74,7 @@ const addTrade = (req, res) => {
 
 const removeTrade = (req, res) => {
             const id = req.params.id;
+            console.log("delid: " +id)
             db.result('DELETE FROM pokemontrades WHERE id = $1', [id])
             .then(result => {
                     if(result.rowCount > 0) {

@@ -1,11 +1,9 @@
-import React from 'react';
+import React from "react";
 
 
-
-export default class SearchPokemon extends React.Component{
-
+export default class AddTrade extends React.Component {
     state = {
-        user: "",
+        username: "",
         pokemon: "",
     }
     
@@ -18,7 +16,8 @@ export default class SearchPokemon extends React.Component{
     }
 
     onSave(event) {
-        fetch('/api/pokemons', {
+        event.preventDefault();
+        fetch('/api/trades', {
         method: 'POST',
         headers: {
         'Accept': 'application/json',
@@ -27,35 +26,38 @@ export default class SearchPokemon extends React.Component{
         body: JSON.stringify(this.state)
         })
         .then(response => response.json())
-        .then(newPokemon => this.props.onPokemonAdded(newPokemon))
+        .then(newTrade => this.props.onTradeAdded(newTrade))
     }
-    
-render() {
-    return (
-        <React.Fragment>
-            <form>
-            <div>
-            <label>Käyttäjä</label>
+
+    render() {
+        return (
+            <React.Fragment>
+            <form onSubmit={(event) => this.onSave(event)}>
+                <div>
+                    <label>Nimi</label>
                     <select 
                         required
-                        name="type"
+                        name="username"
                         onChange={(event) => this.handleInputChange(event)}
                     >
                         <option value="" selected disabled hidden>Please select one</option>
-                        <option value="user">User1</option>
-                        <option value="user">User2</option>
-                        <option value="user">User3</option>
+                        <option value="user1">user1</option>
+                        <option value="user2">user2</option>
+                        <option value="user3">user3</option>
                         
                     </select>
-            </div>
-            <div>
-            <label>Lisää:</label>
-                        <input required name="pokemonName"/>
-            </div>
+                
+                </div>
+                <div>
+                    <label>Pokemon</label>
+                    <input required type="text" name="pokemon" onChange={(event) => 
+                        this.handleInputChange(event)}/>
+                </div>
+            
+                <button type="submit">Lisää</button>
             </form>
-            <button type="submit">Lisää</button>
-        
-        </React.Fragment>
-    );
-}
+            
+            </React.Fragment>
+        );
+    }
 }
