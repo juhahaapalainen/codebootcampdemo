@@ -5,6 +5,7 @@ export default class AddTrade extends React.Component {
     state = {
         username: "",
         pokemon: "",
+        info: "",
     }
     
     handleInputChange(event) {
@@ -17,16 +18,22 @@ export default class AddTrade extends React.Component {
 
     onSave(event) {
         event.preventDefault();
+        console.log("OnSaveevent: pokemon " +this.state.pokemon +" username: " +this.state.username)
         fetch('/api/trades', {
         method: 'POST',
         headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
         },
-        body: JSON.stringify(this.state)
+        body: JSON.stringify({
+            username: this.state.username,
+            pokemon: this.state.pokemon,
+            info: this.state.info
+        })
         })
         .then(response => response.json())
-        .then(newTrade => this.props.onTradeAdded(newTrade))
+        .then(console.log())
+        .then(newTradeItem => this.props.onTradeAdded(newTradeItem))
     }
 
     render() {

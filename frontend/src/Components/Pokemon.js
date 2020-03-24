@@ -1,7 +1,7 @@
 import React from 'react';
 import "./Pokemon.css"
 
-export default function(props) {
+export default function Pokemon(props) {
     //console.log("Moro pokemonista url: " +'../assets/img/pokemon_icons/pokemon_icon_' +props.id +'_00.png')
     
     return (

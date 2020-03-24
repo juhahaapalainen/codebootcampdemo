@@ -58,14 +58,15 @@ const getTrades = (req, res) =>
 
 const addTrade = (req, res) => {
             const trade = req.body;
+            console.log("add:" +trade.username +" " +trade.pokemon)
             db.one(
                 'INSERT INTO pokemontrades(username, pokemon) VALUES($1, $2) RETURNING id',
                 [trade.username, trade.pokemon]
             ).then(result => {
                 res.send({
                     id: result.id,
-                    type: trade.username,
-                    name: trade.pokemon,
+                    username: trade.username,
+                    pokemon: trade.pokemon,
                 });
         
             }).catch(error => res.status(500).send(error))

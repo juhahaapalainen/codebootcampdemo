@@ -12,7 +12,7 @@ import AddTrade from './AddTrade'
 export default function TradePage(props) {
     
     const [trades, setTrades] = useState([]);
-  const pokeDex = oakdexPokedex.allPokemon();
+    const pokeDex = oakdexPokedex.allPokemon();
     const [filterTrades, setFilterTrades] = useState(trades);
     const [search, setSearch] = useState("");
 
@@ -31,15 +31,11 @@ export default function TradePage(props) {
         
     }, []);
 
-    useEffect(() =>{
-        const results = trades.filter(poke => poke.pokemon.toLowerCase().includes(search))
-        console.log("REsults " +results)
-        setFilterTrades(results)
-    },[])
+   
     
     
 
-    const onChange = e => {
+  /*  const onChange = e => {
 
        
        
@@ -59,8 +55,8 @@ export default function TradePage(props) {
         console.log("onchange")
            
 
-    }
-    const handleSearchInputChanges = (e) =>{
+    }*/
+/*    const handleSearchInputChanges = (e) =>{
 
         setSearch(e);
         
@@ -70,7 +66,7 @@ export default function TradePage(props) {
         });
         setTrades(tempFilter);
         console.log("Word: " +e +"Seartsri: "+search)
-    }
+    }*/
 
     const onDelete = (id) => {
         fetch(`/api/trades/${id}`, {
@@ -83,37 +79,31 @@ export default function TradePage(props) {
 
    // const darkPokemon = oakdexPokedex.allPokemon({type: 'Dark'});
    // console.log(darkPokemon.map(monni => monni.names.en));
+    console.log(trades.map(pokeData => pokeData.username))
+    console.log(trades.map(pokeData => pokeData.pokemon))
 
+    
     const tradeElements = trades.map(
         pokeData => {
           return <TradeItem 
             key={pokeData.id} 
             username={pokeData.username}
-            pokemon={pokeData.pokemon.slice(0,1).toUpperCase() + pokeData.pokemon.slice(1, pokeData.pokemon.length)}
+            pokemon={pokeData.pokemon}
             onDelete = {() => onDelete(pokeData.id)}
             
           >
           {pokeData.info}</TradeItem>
         }
     )
+    //.slice(0,1).toUpperCase() + pokeData.pokemon.slice(1, pokeData.pokemon.length)
     console.log(tradeElements)
-   
+   //onChange={e => handleSearchInputChanges(e.target.value)} 
     return (
         <React.Fragment>
         <div>
-        <AddTrade onTradeAdded={(newTrade) => setTrades([...trades, newTrade])} />
+        <AddTrade onTradeAdded={newTradeItem => setTrades([...trades, newTradeItem])} />
           <div>
-          <input
-                  label="Search trade"
-                  icon="search"
-                  value={search}
-                  onChange={e => handleSearchInputChanges(e.target.value)}
-                  type="text"
-                />
-            
-            <button onClick={()=>{
-                window.location.href='./Home';
-            }}> +</button>
+         
           </div>
         <div className = "trades">
             {tradeElements}
@@ -130,3 +120,17 @@ export default function TradePage(props) {
         </React.Fragment>
     );
 }
+
+/*
+ <input
+                  label="Search trade"
+                  icon="search"
+                  value={search}
+               
+                  type="text"
+                />
+            
+            <button onClick={()=>{
+                window.location.href='./Home';
+            }}> +</button>
+*/
