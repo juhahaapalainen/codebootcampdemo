@@ -1,0 +1,19 @@
+.tradepage{
+    background-color: blue;
+}
+.trades {
+    background-color: blue;
+    margin: 20px;
+    padding: 4px;
+    text-align: center;
+
+    float: left;
+
+}
+.users {
+    background-color: green;
+    margin: 20px;
+    padding: 4px;
+    float: left;
+    
+}

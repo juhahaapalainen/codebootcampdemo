@@ -28,20 +28,22 @@ export default function TradeItem(props) {
     //console.log("Thisprops: " +props.event);
 
     return (
-        <div className={`pokemon card`} >
+        <React.Fragment>
+        <div className={`tradeItem card`} >
             <img className="card-img" 
             src= {'/img/pokemon_icons/pokemon_icon_' +poke_id +'_00.png'}
             alt=''
             onError={ (e) => {e.target.onerror=null; e.target.src='/img/pokemon_icons/pokemon_icon_000.png'}}
             ></img>
             <li>{props.pokemon}</li>
-            <li>{props.username}</li>
+            
             <li>{props.info}</li>
             <li>
                 <button onClick={event => props.onDelete()}>X </button>
             </li>
             
             </div>
+            </React.Fragment>
     );
 }
 
