@@ -1,14 +1,56 @@
 .tradeItem {
-    background-color: white;
-    margin: 20px;
-    padding: 4px;
+    background: radial-gradient(ellipse closest-side at center center, white, rgba(106, 176, 76, 0.15) 100%);
+
+    margin: 6px;
+    margin-bottom: 10px;
+    padding-top: 4px;
+    padding-bottom: 10px;
     text-align: center;
-    width: 10.5em;
-    height: 20.2em;
-    float: left;
+    width: 126px;
+    height: 100px;
+    display: inline-block;
+    border-radius: 10px;
+
   }
+.card-img {
+   
+    width: 126px;
+    height: 126px;
+    border: 0px solid #ddd;
+    margin: 0px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+ 
 
+}
+.tradeItem ul {
+    list-style: none;
+    margin: 2px;
+    padding: 0px 2px 2px 2px;
+    
+}
+.img-container {
+    position: relative;
+    width: 100%;
+    margin-top: -35%;
+    margin-bottom: -10%;
+    margin-left: -3%;
 
+}
+.img-container .btn {
+    position: absolute;
+    top: 30%;
+    left: 90%;
+    transform: translate(-50%, -50%);
+    -ms-transform:translate(-50%, -50%);
+    background-color: #555;
+    color: white;
+    font-size: 16px;
+    padding: 2px 4px;
+    border: none;
+    cursor: pointer;
+    border-radius: 6px;
+}
 .Torkoal{
     background-color: green;
 }

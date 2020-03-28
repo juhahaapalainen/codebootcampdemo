@@ -1,4 +1,5 @@
 import React from "react";
+import './AddTrade.css'
 
 
 export default class AddTrade extends React.Component {
@@ -32,14 +33,16 @@ export default class AddTrade extends React.Component {
         })
         })
         .then(response => response.json())
-        .then(console.log())
         .then(newTradeItem => this.props.onTradeAdded(newTradeItem))
+        .then(this.pokemon="")
+        .then(this.username="")
     }
 
     render() {
         return (
             <React.Fragment>
-            <form onSubmit={(event) => this.onSave(event)}>
+            <form class =" addform" onSubmit={(event) => this.onSave(event)}>
+                <h1>Lisää pokemon:</h1>
                 <div>
                     <label>Nimi</label>
                     <select 
@@ -56,8 +59,9 @@ export default class AddTrade extends React.Component {
                 
                 </div>
                 <div>
-                    <label>Pokemon</label>
-                    <input required type="text" name="pokemon" onChange={(event) => 
+                    <label for="pokemon">Pokemon</label>
+                    <input class ="pokemoninput" required type="text" id="pokemon" name="pokemon" value = {this.pokemon}
+                     onChange={(event) => 
                         this.handleInputChange(event)}/>
                 </div>
             

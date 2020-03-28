@@ -1,41 +1,3 @@
-const tradeList = [
-    {
-        "id": 1, 
-        "pokemon": "Torkoal" , 
-        "user": "User1"
-    },
-    {
-        "id": 2, 
-        "pokemon": "Heracross", 
-        "user": "User2"
-    },
-    {
-        "id": 3, 
-        "pokemon": "Torkoal", 
-        "user": "User3"
-    },
-    {
-        "id": 4, 
-        "pokemon": "Heracross", 
-        "user": "User3"
-    },
-    {
-        "id": 5, 
-        "pokemon": "Heracross", 
-        "user": "User1"
-    },
-    {
-        "id": 6, 
-        "pokemon": "Relicanth", 
-        "user": "User1"
-    },
-    {
-        "id": 7, 
-        "pokemon": "Carnivine", 
-        "user": "User3"
-    }
-];
-
 const pgp = require('pg-promise')(); 
 
  const db = pgp ( 
@@ -48,8 +10,6 @@ const pgp = require('pg-promise')();
     max: 30 // use up to 30 connections
 }
  );
-
-
 
 const getTrades = (req, res) => 
     db.any('SELECT * FROM pokemontrades')

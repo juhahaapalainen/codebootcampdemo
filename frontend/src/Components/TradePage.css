@@ -1,8 +1,20 @@
 .tradepage{
     background-color: blue;
+    float: left;
+}
+.users {
+    position: left;
+    background-color: white;
+    margin: 20px;
+    
+    padding: 4px;
+    float: left;
+    
+    width: 100%;
+    
 }
 .trades {
-    background-color: blue;
+    background-color: white;
     margin: 20px;
     padding: 4px;
     text-align: center;
@@ -10,10 +22,4 @@
     float: left;
 
 }
-.users {
-    background-color: green;
-    margin: 20px;
-    padding: 4px;
-    float: left;
-    
-}
+

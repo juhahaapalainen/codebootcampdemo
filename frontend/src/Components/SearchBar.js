@@ -1,5 +1,5 @@
 import React, { PropTypes, useState } from 'react';
-
+import './SearchBar.css'
 
 const SearchBar = ( {addSearchTerm}) => {
     const [searchTerm, setSearchTerm] = useState('');
@@ -7,8 +7,8 @@ const SearchBar = ( {addSearchTerm}) => {
     addSearchTerm(searchTerm);
         return (
             <form>
-            <label>Search</label>
-            <input type ="text" value={searchTerm} onChange={ e => setSearchTerm(e.target.value) } />
+            
+            <input label="Search" class="searchbar" type ="text" placeholder="Search..." value={searchTerm} onChange={ e => setSearchTerm(e.target.value) } />
             </form>
         );
 }        

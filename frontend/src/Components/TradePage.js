@@ -112,8 +112,9 @@ export default function TradePage(props) {
         }
     )
 
-    const filterTradeElements = filterTrades
-    .sort((a,b) => a.username.localeCompare(b.username))
+    const filteredTradeElements = trades
+    //.filter(suodatin => suodatin.username.includes(user))
+    .filter(hakuSuodatin => hakuSuodatin.pokemon.toLowerCase().includes(search.toLowerCase()))
     .map(
         pokeData => {
           return <TradeItem 
@@ -153,54 +154,41 @@ export default function TradePage(props) {
     //console.log(tradeElements)
    // console.log(users)
    //onChange={e => handleSearchInputChanges(e.target.value)} 
-   console.log(trades.filter(suodatin => suodatin.username.indexOf("user1")))
+   //console.log(trades.filter(suodatin => suodatin.username.indexOf("user1")))
+/*<form>
+<label>Search</label>
+<input type ="text" value={search} onChange={ e => addSearchTerm(e.target.value) } />
+</form>*/
 
-   const user1Trades = trades.filter(suodatin => suodatin.username.includes("user1"));
-
-   const user1TradeElements = user1Trades
-   .sort((a,b) => a.username.localeCompare(b.username))
-   .map(
-       pokeData => {
-         return <TradeItem 
-           key={pokeData.id} 
-           username={pokeData.username}
-           pokemon={pokeData.pokemon}
-           onDelete = {() => onDelete(pokeData.id)}
-           
-         >
-         {pokeData.info}</TradeItem>
-       }
-   )
 
     return (
         <React.Fragment>
         <div> 
         <AddTrade onTradeAdded={newTradeItem => setTrades([...trades, newTradeItem])} />
-        <form>
-            <label>Search</label>
-            <input type ="text" value={search} onChange={ e => addSearchTerm(e.target.value) } />
-            </form>
+        <SearchBar addSearchTerm={addSearchTerm}/>
 
      <div>
         {users.map((user) => 
             <div className = "users">
              <h1>{user}</h1>
-             { 
-                trades
-                .filter(suodatin => suodatin.username.includes(user))
-                .map( pokeData => {
-                    return <TradeItem 
-                      key={pokeData.id} 
-                      username={pokeData.username}
-                      pokemon={pokeData.pokemon}
-                      onDelete = {() => onDelete(pokeData.id)}
-                      
-                    >
-                    {pokeData.info}</TradeItem>
-                  }
-              )
+                <div className="trades">
+                { 
+                    trades
+                    .filter(suodatin => suodatin.username.includes(user))
+                    .filter(hakuSuodatin => hakuSuodatin.pokemon.toLowerCase().includes(search.toLowerCase()))
+                    .map( pokeData => {
+                        return <TradeItem 
+                        key={pokeData.id} 
+                        username={pokeData.username}
+                        pokemon={pokeData.pokemon}
+                        onDelete = {() => onDelete(pokeData.id)}
+                        
+                        >
+                        {pokeData.info}</TradeItem>
+                    })
+
                 }
-                
+                </div>
              </div>  
             )
            
