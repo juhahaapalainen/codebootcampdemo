@@ -22,7 +22,7 @@ app.listen(port, () => console.log(`Example app listening on port ${port}!`))
 
 const Discord = require('discord.js')
 const client = new Discord.Client();
-const tradeData = []; 
+const tradeData = [];
 
 /*http.get('http://localhost:4000/trades', function(res) {
 
@@ -39,11 +39,30 @@ const tradeData = [];
 
 fetch('http://localhost:4000/trades')
     .then(res => res.json())
-    .then(json => console.log(json))
-    .then(json => tradeData.push(json))
-    .then(console.log(tradeData))
+    .then(data => teeJottain(data))
+    //.then(json => console.log(json))
+    //.then(json => console.log(json))
+    // .then(console.log("Tradedata: " +tradeData))
+     .catch(err => console.log(err))
 
-    
+    // loadJSON('http://localhost:4000/trades')
+
+function teeJottain(data) {
+        //console.log(data[0]);
+       // Array.prototype.push.apply(tradeData, data)
+        //console.log(tradeData[0])
+        //tradeData = Object.keys(data.map((key) => [key, data[key]]))
+        //tradeData= JSON.stringify(data)
+       for(var i in data) {
+           // tradeData.push([i], data[i])
+           //console.log(i +data[i])
+           tradeData.push(data[i])
+           
+        }
+        //console.log(tradeData)
+       // console.log("jotain:" +jotain)
+    }
+
 //console.log("Tradedata: " +tradeData);
 
 client.on('ready', () => {
@@ -70,7 +89,7 @@ function processCommand(msg) {
     let arguments = splitCommand.slice(1)
 
     console.log("Command: " +primaryCommand)
-    console.log("Arguments: " +arguments)
+    console.log("Arguments: " +arguments.toString().toLowerCase())
 
     if(primaryCommand == "search") {
         searchCommand(arguments, msg)
@@ -79,9 +98,17 @@ function processCommand(msg) {
 
 function searchCommand(arguments, msg) {
     console.log("Search for: " +arguments)
-    msg.channel.send("Etsit: " +arguments)
+    //msg.channel.send("Etsit: " +arguments)
+   // console.log(tradeData)
+ //  const users = (tradeData.map(pokeData => pokeData.username))
+   // console.log(users)
+    const filtTrades = tradeData
+    .filter(hakuSuodatin => hakuSuodatin.pokemon.toLowerCase().includes(arguments.toString().toLowerCase()))
+    .map(pokeData =>  pokeData.username)
     //getData();
     //console.log("trades: " +tradeData)
+    console.log(filtTrades)
+   msg.channel.send("Pokemonia " +arguments +" haluavat käyttäjät: " +filtTrades)
 }
 
 /*async function getData() {
