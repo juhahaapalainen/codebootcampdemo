@@ -8,7 +8,7 @@ const SearchBar = ( {addSearchTerm}) => {
         return (
             <form>
             
-            <input label="Search" class="searchbar" type ="text" placeholder="Search..." value={searchTerm} onChange={ e => setSearchTerm(e.target.value) } />
+            <input label="Search" className="searchbar" type ="text" placeholder="Search..." value={searchTerm} onChange={ e => setSearchTerm(e.target.value) } />
             </form>
         );
 }        

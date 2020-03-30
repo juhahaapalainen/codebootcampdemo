@@ -41,28 +41,27 @@ export default class AddTrade extends React.Component {
     render() {
         return (
             <React.Fragment>
-            <form class =" addform" onSubmit={(event) => this.onSave(event)}>
+            <form className =" addform" onSubmit={(event) => this.onSave(event)}>
                 <h1>Lisää pokemon:</h1>
                 <div>
                     <label>Nimi</label>
-                    <select 
-                        required
-                        name="username"
-                        onChange={(event) => this.handleInputChange(event)}
-                    >
-                        <option value="" selected disabled hidden>Please select one</option>
-                        <option value="user1">user1</option>
-                        <option value="user2">user2</option>
-                        <option value="user3">user3</option>
-                        
-                    </select>
-                
+                    <input  required 
+                            className ="usernameinput" 
+                            type="text" 
+                            id="username" 
+                            name="username" 
+                            value = {this.username}
+                     onChange={(event) => this.handleInputChange(event)}/>
                 </div>
                 <div>
-                    <label for="pokemon">Pokemon</label>
-                    <input class ="pokemoninput" required type="text" id="pokemon" name="pokemon" value = {this.pokemon}
-                     onChange={(event) => 
-                        this.handleInputChange(event)}/>
+                    <label>Pokemon</label>
+                    <input  required 
+                            className ="pokemoninput"  
+                            type="text" 
+                            id="pokemon" 
+                            name="pokemon" 
+                            value = {this.pokemon}
+                            onChange={(event) => this.handleInputChange(event)}/>
                 </div>
             
                 <button type="submit">Lisää</button>

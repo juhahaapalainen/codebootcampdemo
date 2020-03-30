@@ -61,9 +61,11 @@ const [tradeList, setTradeList] = useState([]);
         fetchData();   
     }, []);
 
-    
+  const pokemon = oakdexPokedex.findPokemon("Ratta");
+  if(pokemon !== null) {
+    console.log("Pokemooni: " +pokemon.national_id)
+  }
   
-
 
     const tradeElements = tradeList.map(
         tradeData => {

@@ -1,7 +1,6 @@
-import React, {useState, useEffectfrom, useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import "./Home.css"
-import oakdexPokedex from 'oakdex-pokedex';
-import Pokedex from './Pokedex';
+//import oakdexPokedex from 'oakdex-pokedex';
 import TradeItem from './TradeItem'
 import AddTrade from './AddTrade'
 import './TradePage.css'
@@ -14,12 +13,12 @@ import SearchBar from './SearchBar'
 export default function TradePage(props) {
     
     const [trades, setTrades] = useState([]);
-    const pokeDex = oakdexPokedex.allPokemon();
-    const [filterTrades, setFilterTrades] = useState([]);
+    //const pokeDex = oakdexPokedex.allPokemon();
+   // const [filterTrades, setFilterTrades] = useState([]);
     const [search, setSearch] = useState('');
 
-    useEffect(() => {
-        if(search != '') {
+ /*   useEffect(() => {
+        if(search !== '') {
          const tempTrades = (trades.filter(trade => trade.pokemon.toLowerCase().indexOf(search.toLowerCase()) !== -1))
          setFilterTrades(tempTrades)
          }
@@ -27,7 +26,7 @@ export default function TradePage(props) {
              setFilterTrades(trades)
          }
  
-    }, [search])
+    }, [search])*/
     
     useEffect(() => {
         async function fetchData() {
@@ -97,36 +96,21 @@ export default function TradePage(props) {
     //console.log(filterTrades.map(pokeData => pokeData.pokemon))
 
     
-    const tradeElements = trades
-    .sort((a,b) => a.username.localeCompare(b.username))
-    .map(
-        pokeData => {
-          return <TradeItem 
-            key={pokeData.id} 
-            username={pokeData.username}
-            pokemon={pokeData.pokemon}
-            onDelete = {() => onDelete(pokeData.id)}
-            
-          >
-          {pokeData.info}</TradeItem>
-        }
-    )
-
-    const filteredTradeElements = trades
-    //.filter(suodatin => suodatin.username.includes(user))
+ /*   const tradeElements =  trades
+    .filter(suodatin => suodatin.username.includes(user))
     .filter(hakuSuodatin => hakuSuodatin.pokemon.toLowerCase().includes(search.toLowerCase()))
-    .map(
-        pokeData => {
-          return <TradeItem 
-            key={pokeData.id} 
-            username={pokeData.username}
-            pokemon={pokeData.pokemon}
-            onDelete = {() => onDelete(pokeData.id)}
-            
-          >
-          {pokeData.info}</TradeItem>
-        }
-    )
+    .map( pokeData => {
+        return <TradeItem 
+        key={pokeData.id} 
+        username={pokeData.username}
+        pokemon={pokeData.pokemon}
+        onDelete = {() => onDelete(pokeData.id)}
+        
+        >
+        {pokeData.info}</TradeItem>
+    })*/
+
+   
 
     const temp = trades.map(kayttajadata => (kayttajadata.username)).sort();
     const unique = new Set(temp);
@@ -169,7 +153,7 @@ export default function TradePage(props) {
 
      <div>
         {users.map((user) => 
-            <div className = "users">
+            <div className = {`users ${user}`}>
              <h1>{user}</h1>
                 <div className="trades">
                 { 
@@ -189,6 +173,7 @@ export default function TradePage(props) {
 
                 }
                 </div>
+              
              </div>  
             )
            
