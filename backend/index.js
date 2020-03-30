@@ -72,6 +72,7 @@ client.on('ready', () => {
 
 client.on('message', msg =>  {
 
+    console.log(msg.user)
     if(msg.content.startsWith('!')) {
         processCommand(msg);
     }
@@ -94,6 +95,12 @@ function processCommand(msg) {
     if(primaryCommand == "search") {
         searchCommand(arguments, msg)
     }
+    if(primaryCommand == "user") {
+        userCommand(arguments, msg)
+    }
+    if(primaryCommand == "add") {
+        addCommand(arguments, msg)
+    }
 }
 
 function searchCommand(arguments, msg) {
@@ -111,6 +118,20 @@ function searchCommand(arguments, msg) {
    msg.channel.send("Pokemonia " +arguments +" haluavat käyttäjät: " +filtTrades)
 }
 
+function userCommand(arguments, msg) {
+    console.log("Search for: " +arguments)
+       const filtTrades = tradeData
+    .filter(hakuSuodatin => hakuSuodatin.username.toLowerCase().includes(arguments.toString().toLowerCase()))
+    .map(pokeData =>  pokeData.pokemon)
+    
+    console.log(filtTrades)
+   msg.channel.send("Käyttäjä " +arguments +" haluaa: " +filtTrades)
+}
+
+function addCommand(arguments, msg) {
+
+    console.log("Käyttäjä: " +msg.user +" Listättävä: " +arguments)
+}
 /*async function getData() {
     const res = await fetch("/api/trades");
     res
