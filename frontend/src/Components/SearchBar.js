@@ -1,10 +1,11 @@
-import React, { PropTypes, useState } from 'react';
+import React, { useState } from 'react';
 import './SearchBar.css'
 
 const SearchBar = ( {addSearchTerm}) => {
     const [searchTerm, setSearchTerm] = useState('');
-    console.log("Searchterm: " +searchTerm)
+    //console.log("Searchterm: " +searchTerm)
     addSearchTerm(searchTerm);
+
         return (
             <form>
             

@@ -15,8 +15,6 @@ app.get('/', (req, res) => res.send('Hello World'))
 app.get('/trades', (req, res) => trades.getTrades(req, res))
 app.post('/trades', (req, res) => trades.addTrade(req, res))
 app.delete('/trades/:id', (req, res) => trades.removeTrade(req, res))
-//app.post('/pokemons', (req, res) => pokemons.addPokemon(req, res))
-//app.delete('/pokemons/:id', (req, res) => pokemons.removePokemon(req, res))
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
 
@@ -24,49 +22,39 @@ const Discord = require('discord.js')
 const client = new Discord.Client();
 let tradeData = []
 
-/*http.get('http://localhost:4000/trades', function(res) {
-
-    var body = "";
-    res.on('data', function(chunk){
-        body += chunk;
-    });
-    res.on('end', function(){
-        var resp = JSON.parse(body)
-        console.log(resp)
-        
-    })
-})*/
-
 fetch('http://localhost:3000/api/trades')
     .then(res => res.json())
     .then(data => handleData(data))
     //.then(json => console.log(json))
-    //.then(json => console.log(json))
-    // .then(console.log("Tradedata: " +tradeData))
-     .catch(err => console.log(err))
+    .catch(err => console.log(err))
 
-    // loadJSON('http://localhost:4000/trades')
+/*const request = async() => {
+
+    const response = await fetch('http://localhost:4000/trades')
+    const json = await response.json()
+    console.log(json)
+   
+}*/
+
+function handleData(data) {
+     
+    tradeData = [];
+
+    for(var i in data) {
+    //    console.log(data[i])
+        tradeData.push(data[i])
+    }
+  //  console.log(tradeData)
+}
 
 function haeTradet() {
 
     fetch('http://localhost:3000/api/trades')
-    .then(res => res.json())
-    .then(data => handleData(data))
-    .catch(err => console.log(err))
+        .then(res => res.json())
+        .then(data => handleData(data))
+        //.then(json => console.log(json))
+        .catch(err => console.log(err))
 }
-function handleData(data) {
-     
-        tradeData = [];
-       for(var i in data) {
-           // tradeData.push([i], data[i])
-           //console.log(i +data[i])
-           tradeData.push(data[i])
-           
-        }
-        //console.log(tradeData)
-       // console.log("jotain:" +jotain)
-    }
-
 //console.log("Tradedata: " +tradeData);
 //console.log(trades.getTrades(req,res))
 
@@ -98,6 +86,7 @@ function processCommand(msg) {
     console.log("Command: " +primaryCommand)
     console.log("Arguments: " +arguments.toString().toLowerCase())
     console.log("User: " +user)
+
     if(primaryCommand == "search") {
         searchCommand(arguments, msg)
     }
@@ -116,7 +105,8 @@ function searchCommand(arguments, msg) {
  //  const users = (tradeData.map(pokeData => pokeData.username))
    // console.log(users)
  
-     haeTradet();
+    haeTradet();
+    
     const filtTrades = tradeData
     .filter(hakuSuodatin => hakuSuodatin.pokemon.toLowerCase().includes(arguments.toString().toLowerCase()))
     .map(pokeData =>  pokeData.username)
@@ -130,10 +120,11 @@ function userCommand(arguments, msg) {
     console.log("Search for: " +arguments)
 
     haeTradet();
+ 
     console.log("TradeData userista: " +tradeData)
-       const filtTrades = tradeData
-    .filter(hakuSuodatin => hakuSuodatin.username.toLowerCase().includes(arguments.toString().toLowerCase()))
-    .map(pokeData =>  pokeData.pokemon)
+        const filtTrades = tradeData
+            .filter(hakuSuodatin => hakuSuodatin.username.toLowerCase().includes(arguments.toString().toLowerCase()))
+            .map(pokeData =>  pokeData.pokemon)
     
     console.log(filtTrades)
    msg.channel.send("Käyttäjä " +arguments +" haluaa: " +filtTrades)
@@ -145,8 +136,7 @@ function addCommand(arguments, msg) {
         +" Monta tulossa? " +arguments.length)
 
     for(var i in arguments) {
-        console.log(arguments[i])
-    
+        //console.log(arguments[i])
     
     fetch('http://localhost:3000/api/trades', {
         method: 'POST',
@@ -155,22 +145,18 @@ function addCommand(arguments, msg) {
         'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            username: msg.member.user.username,
-            pokemon: arguments[i],
+            username: msg.member.user.username.toString(),
+            pokemon: arguments[i].toString(),
             info: ""
         })
         })
         .then(response => response.json())
+        //.then(newTradeItem => handleData(newTradeItem))
     }  
        
     
 }
-/*async function getData() {
-    const res = await fetch("/api/trades");
-    res
-        .json()
-        .then(data => tradeData.push(data))
-        .catch(err => console.log(err))
-} */
+
+
 
 client.login('NjkzMDA2OTA4MjgxNTg1Njc0.Xn226A.oeLYgrsZ7W4zM3UcNyb3yhQlXuI');

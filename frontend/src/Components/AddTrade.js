@@ -2,13 +2,18 @@ import React from "react";
 import './AddTrade.css'
 
 
+
 export default class AddTrade extends React.Component {
     state = {
         username: "",
         pokemon: "",
         info: "",
+        
     }
     
+    
+
+
     handleInputChange(event) {
         const target = event.target;
         const value = target.value;

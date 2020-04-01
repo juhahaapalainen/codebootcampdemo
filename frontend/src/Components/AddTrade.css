@@ -4,11 +4,11 @@
     
     background-position: 10px 10px;
     background-repeat: no-repeat;
-    padding-left: 40px;
+    padding-left: 10px;
     box-sizing: border-box;
 }
 .addform {
-    background-color: tomato;
+    background-color: white;
     padding: 10px;
     margin: 10px;
 }
