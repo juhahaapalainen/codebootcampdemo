@@ -58,7 +58,7 @@ export default function TradePage(props) {
 
         <div>
         {users.map((user) => 
-            <div className = {`users ${user}`}>
+            <div key={user} className = {`users ${user}`}>
              <h1>{user}</h1>
                 <div className="trades">
                 { 
