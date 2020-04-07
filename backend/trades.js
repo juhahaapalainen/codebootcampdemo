@@ -18,10 +18,12 @@ const getTrades = (req, res) =>
 
 const addTrade = (req, res) => {
     const trade = req.body;
+    const username = trade.username
+    const pokemon = trade.pokemon.charAt(0).toUpperCase() + trade.pokemon.slice(1)
     console.log("add:" + trade.username + " " + trade.pokemon)
     db.one(
         'INSERT INTO pokemontrades(username, pokemon) VALUES($1, $2) RETURNING id',
-        [trade.username, trade.pokemon]
+        [username, pokemon]
     ).then(result => {
         res.send({
             id: result.id,

@@ -14,7 +14,6 @@ app.get('/', (req, res) => res.send('Hello World'))
 
 app.get('/trades', (req, res) => trades.getTrades(req, res))
 app.post('/trades', (req, res) => trades.addTrade(req, res))
-app.post('/trades', (req, res) => trades.addTradeDiscord(req, res))
 app.delete('/trades/:id', (req, res) => trades.removeTrade(req, res))
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
@@ -67,7 +66,7 @@ client.on('ready', () => {
 
 client.on('message', msg => {
 
-    console.log(msg.user)
+    //console.log(msg.user)
     if (msg.content.startsWith('!')) {
         processCommand(msg);
     }
@@ -80,12 +79,13 @@ client.on('message', msg => {
 
 function processCommand(msg) {
     const fullCommand = msg.content.substr(1)
-    const splitCommand = fullCommand.split(" ");
+    //const re = /\s*(?:[,/]|$)\s*
+    const splitCommand = fullCommand.split(/\s*(?:[, /]|$)\s*/g)
     const primaryCommand = splitCommand[0]
     const user = msg.member.user.username;
     let arguments = splitCommand.slice(1)
 
-    //console.log("Command: " + primaryCommand)
+    // console.log("Command: " + primaryCommand)
     //console.log("Arguments: " + arguments.toString().toLowerCase())
     //console.log("User: " + user)
 
@@ -97,6 +97,9 @@ function processCommand(msg) {
     }
     if (primaryCommand == "add") {
         addCommand(arguments, msg)
+    }
+    if (primaryCommand == "del") {
+        deleteCommand(arguments, msg)
     }
 }
 
@@ -123,6 +126,7 @@ function userCommand(arguments, msg) {
             const filtTrades = tradeData
                 .filter(hakuSuodatin => hakuSuodatin.username.toLowerCase().includes(arguments.toString().toLowerCase()))
                 .map(pokeData => pokeData.pokemon)
+            //console.log(" id: " + tradeData[0].id)
             msg.channel.send("Käyttäjä " + arguments + " haluaa: " + filtTrades)
         }
 
@@ -135,39 +139,61 @@ function addCommand(arguments, msg) {
     console.log("Käyttäjä: " + msg.member.user.username + " Lisättävä: " + arguments
         + " Monta tulossa? " + arguments.length)
 
-
-    trades.addTrade({
-        body: {
-            username: msg.member.user.username.toString(),
-            pokemon: arguments[0].toString(),
-
-        }
-    }
-    );
-
-    /*
-    for (var i in arguments) {
-        //console.log(arguments[i])
-
-        fetch('http://localhost:3000/api/trades', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                username: msg.member.user.username.toString(),
-                pokemon: arguments[i].toString(),
-                info: ""
-            })
-        })
-            .then(response => response.json())
-        //.then(newTradeItem => handleData(newTradeItem))
+    /*for (i in arguments) {
+        console.log(arguments[i].replace(/[,()]/g, '').replace(/[/]/g, ' '))
     }*/
+
+
+    for (i in arguments) {
+        trades.addTrade({
+            body: {
+                username: msg.member.user.username.toString(),
+                pokemon: arguments[i].toString().replace(/[,()]/g, '').replace(/[/]/g, ' '),
+
+            }
+        }, { status: (errorCode) => ({ send: (errorMsg) => console.log("ERROR", errorCode, errorMsg) }) }
+        );
+    }
+
 
 
 }
 
+function deleteCommand(arguments, msg) {
 
+    //console.log(arguments)
+
+    //console.log(msg)
+
+    trades.getTrades({}, {
+        send: tradeData => {
+            const filtTrades = tradeData
+                .filter(filterName => filterName.username.toLowerCase().includes(msg.member.user.username.toString().toLowerCase()))
+                .filter(filterPokemon => filterPokemon.pokemon.toLowerCase().includes(arguments.toString().toLowerCase()))
+                .map(pokeData => pokeData.id)
+            console.log("tradeData " + filtTrades)
+            deleteTrade(filtTrades)
+            //msg.channel.send("Käyttäjä " + arguments + " haluaa: " + filtTrades)
+        }
+
+    })
+
+
+
+    /*trades.removeTrade(filtTrades,
+        { status: (errorCode) => ({ send: (errorMsg) => console.log("ERROR", errorCode, errorMsg) }) }
+    );*/
+
+}
+
+function deleteTrade(id) {
+
+    console.log("Tää id pitäs poistaa: " + id)
+    //trades.removeTrade({}, { status: (errorCode) => ({ send: (errorMsg) => console.log("ERROR", errorCode, errorMsg) }) });
+    /*trades.removeTrade(id,
+        { status: (errorCode) => ({ send: (errorMsg) => console.log("ERROR", errorCode, errorMsg) }) }
+    );*/
+
+}
 
 client.login('NjkzMDA2OTA4MjgxNTg1Njc0.Xn226A.oeLYgrsZ7W4zM3UcNyb3yhQlXuI');
