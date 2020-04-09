@@ -28,26 +28,29 @@ export default class AddTrade extends React.Component {
         fetch('/api/trades', {
             method: 'POST',
             headers: {
-                'Accept': 'application/json',
+                Accept: 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({
-                username: this.state.username,
-                pokemon: this.state.pokemon,
-                info: this.state.info
-            })
+            body: JSON.stringify(
+                this.state
+            )
         })
             .then(response => response.json())
-            .then(newTradeItem => this.props.onTradeAdded(newTradeItem))
-            .then(this.pokemon = "")
-            .then(this.username = "")
+            .then(newTradeItem => {
+                this.props.onTradeAdded(newTradeItem)
+                this.setState({
+                    username: "",
+                    pokemon: ""
+                })
+            })
+
     }
 
     render() {
         return (
             <React.Fragment>
                 <form className=" addform" onSubmit={(event) => this.onSave(event)}>
-                    <h3>Lisää pokemon:</h3>
+                    <h3>Add trade:</h3>
                     <div>
                         <label>Username</label>
                         <input required

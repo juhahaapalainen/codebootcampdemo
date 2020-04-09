@@ -20,15 +20,15 @@ const addTrade = (req, res) => {
     const trade = req.body;
     const username = trade.username
     const pokemon = trade.pokemon.charAt(0).toUpperCase() + trade.pokemon.slice(1)
-    console.log("add:" + trade.username + " " + trade.pokemon)
+    console.log("add:" + username + " " + pokemon)
     db.one(
         'INSERT INTO pokemontrades(username, pokemon) VALUES($1, $2) RETURNING id',
         [username, pokemon]
     ).then(result => {
         res.send({
             id: result.id,
-            username: trade.username,
-            pokemon: trade.pokemon,
+            username: username,
+            pokemon: pokemon,
         });
 
     }).catch(error => res.status(500).send(error))
@@ -36,19 +36,35 @@ const addTrade = (req, res) => {
 }
 
 const removeTrade = (req, res) => {
-    const id = req.params.id;
+    // console.log("req " + req.id)
+    let id = -1;
+    if (req.id === undefined) {
+        //console.log("req.id undefined " + req)
+        id = req.params.id;
+    }
+    else {
+        id = req.id;
+    }
+
     console.log("delid: " + id)
-    db.result('DELETE FROM pokemontrades WHERE id = $1', [id])
-        .then(result => {
-            if (result.rowCount > 0) {
-                res.send("OK");
+    if (id > 0) {
+        db.result('DELETE FROM pokemontrades WHERE id = $1', [id])
+            .then(result => {
+                if (result.rowCount > 0) {
+                    res.send("OK");
 
-            } else {
-                res.status(404).send("Not found");
-            }
+                } else {
+                    res.status(404).send("Not found");
+                }
 
-        }).catch(error => res.status(500).send(error))
+            }).catch(error => res.status(500).send(error))
+    }
+    else {
+        res.status(404).send("Not found")
+    }
 }
+
+
 /*const getTrades = (req, res) => res.send(tradeList);
 const addTrade = (req, res) => {
  

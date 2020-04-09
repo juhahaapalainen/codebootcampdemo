@@ -22,43 +22,6 @@ const Discord = require('discord.js')
 const client = new Discord.Client();
 let tradeData = []
 
-/*fetch('http://localhost:3000/api/trades')
-    .then(res => res.json())
-    .then(data => handleData(data))
-    //.then(json => console.log(json))
-    .catch(err => console.log(err))*/
-
-
-/*const request = async() => {
-
-    const response = await fetch('http://localhost:4000/trades')
-    const json = await response.json()
-    console.log(json)
-   
-}*/
-
-/*function handleData(data) {
-
-    tradeData = [];
-
-    for (var i in data) {
-        //    console.log(data[i])
-        tradeData.push(data[i])
-    }
-    //  console.log(tradeData)
-}
-
-function haeTradet() {
-
-    fetch('http://localhost:3000/api/trades')
-        .then(res => res.json())
-        .then(data => handleData(data))
-        //.then(json => console.log(json))
-        .catch(err => console.log(err))
-}*/
-//console.log("Tradedata: " +tradeData);
-//console.log(trades.getTrades(req,res))
-
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
 
@@ -89,17 +52,20 @@ function processCommand(msg) {
     //console.log("Arguments: " + arguments.toString().toLowerCase())
     //console.log("User: " + user)
 
-    if (primaryCommand == "search") {
+    if (primaryCommand === "search") {
         searchCommand(arguments, msg)
     }
-    if (primaryCommand == "user") {
+    else if (primaryCommand === "user") {
         userCommand(arguments, msg)
     }
-    if (primaryCommand == "add") {
+    else if (primaryCommand === "add") {
         addCommand(arguments, msg)
     }
-    if (primaryCommand == "del") {
+    else if (primaryCommand === "del") {
         deleteCommand(arguments, msg)
+    }
+    else {
+        msg.channel.send("Command **" + primaryCommand + "** not found")
     }
 }
 
@@ -147,7 +113,7 @@ function addCommand(arguments, msg) {
     for (i in arguments) {
         trades.addTrade({
             body: {
-                username: msg.member.user.username.toString(),
+                username: msg.member.displayName.toString(),
                 pokemon: arguments[i].toString().replace(/[,()]/g, '').replace(/[/]/g, ' '),
 
             }
@@ -162,7 +128,11 @@ function addCommand(arguments, msg) {
 function deleteCommand(arguments, msg) {
 
     //console.log(arguments)
-
+    const id = arguments[0]
+    const pokemon = ""
+    const username = ""
+    console.log("id: " + id)
+    //const delTrade = -1;
     //console.log(msg)
 
     trades.getTrades({}, {
@@ -172,28 +142,39 @@ function deleteCommand(arguments, msg) {
                 .filter(filterPokemon => filterPokemon.pokemon.toLowerCase().includes(arguments.toString().toLowerCase()))
                 .map(pokeData => pokeData.id)
             console.log("tradeData " + filtTrades)
-            deleteTrade(filtTrades)
-            //msg.channel.send("Käyttäjä " + arguments + " haluaa: " + filtTrades)
+            deleteTrade(filtTrades, msg, arguments)
+
         }
 
-    })
+    }
+    )
 
+    // msg.channel.send("OK")
+    // console.log("Deltrades: " + delTrade)
 
-
-    /*trades.removeTrade(filtTrades,
+    //delTrade.map(id => delTrade.id)
+    /*trades.removeTrade({ id: id },
         { status: (errorCode) => ({ send: (errorMsg) => console.log("ERROR", errorCode, errorMsg) }) }
-    );*/
+    )*/
 
 }
 
-function deleteTrade(id) {
+function deleteTrade(id, msg, arguments) {
 
-    console.log("Tää id pitäs poistaa: " + id)
-    //trades.removeTrade({}, { status: (errorCode) => ({ send: (errorMsg) => console.log("ERROR", errorCode, errorMsg) }) });
-    /*trades.removeTrade(id,
-        { status: (errorCode) => ({ send: (errorMsg) => console.log("ERROR", errorCode, errorMsg) }) }
-    );*/
-
+    if (id != '') {
+        console.log("Ei tyhjä")
+        trades.removeTrade({ id: filtTrades[0] },
+            { status: (errorCode) => ({ send: (errorMsg) => console.log("ERROR", errorCode, errorMsg) }) }
+        );
+        msg.channel.send("Poistettu: " + arguments)
+    }
+    else {
+        console.log("Tyhjä " + arguments)
+        msg.channel.send("Ei löydy " + arguments)
+    }
+    /*  */
 }
+
+
 
 client.login('NjkzMDA2OTA4MjgxNTg1Njc0.Xn226A.oeLYgrsZ7W4zM3UcNyb3yhQlXuI');
