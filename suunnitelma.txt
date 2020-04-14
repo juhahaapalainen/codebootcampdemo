@@ -1,8 +1,0 @@
-käyttäjä voi lisätä listaan, joko yksi kerrallaan tai listana
-    lisää 1 -> lisää 2 tai lisää 1, 2
-käyttäjä voi poistaa listasta 
-    poista 1 -> poista 2 tai poista 1, 2
-käyttäjä voi hakea haluaako joku tiettyä monnia tai tiettyjä
-    hae 1 tai hae 1, 2, 3
-käyttäjä voi hakea toisen käyttäjän koko listan
-    hae käyttäjän x lista
