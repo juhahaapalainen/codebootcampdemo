@@ -2,9 +2,8 @@ const express = require('express')
 const bodyParser = require('body-parser');
 const trades = require('./trades');
 const app = express()
-const http = require('http')
-const fetch = require('node-fetch')
-
+const JSONDB = require('node-json-db')
+const Discord = require('discord.js')
 //const request = require('request')
 app.use(bodyParser.json());
 
@@ -18,8 +17,12 @@ app.delete('/trades/:id', (req, res) => trades.removeTrade(req, res))
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
 
-const Discord = require('discord.js')
+
+const configDb = new JSONDB('config', true, true)
+const config = configDb.getData('/') || {}
 const client = new Discord.Client();
+client.login(configDb.getData('/key'));
+
 let tradeData = []
 
 client.on('ready', () => {
@@ -177,4 +180,3 @@ function deleteTrade(id, msg, arguments) {
 
 
 
-client.login('NjkzMDA2OTA4MjgxNTg1Njc0.Xn226A.oeLYgrsZ7W4zM3UcNyb3yhQlXuI');
