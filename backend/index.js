@@ -2,9 +2,8 @@ const express = require('express')
 const bodyParser = require('body-parser');
 const trades = require('./trades');
 const app = express()
-//const JSONDB = require('node-json-db')
 const Discord = require('discord.js')
-//const request = require('request')
+
 app.use(bodyParser.json());
 
 const port = 4000
@@ -45,13 +44,12 @@ client.on('message', msg => {
 
 function processCommand(msg) {
     const fullCommand = msg.content.substr(1)
-    //const re = /\s*(?:[,/]|$)\s*
     const splitCommand = fullCommand.split(/\s*(?:[, /]|$)\s*/g)
     const primaryCommand = splitCommand[0]
     const user = msg.member.user.username;
     let arguments = splitCommand.slice(1)
 
-    // console.log("Command: " + primaryCommand)
+    //console.log("Command: " + primaryCommand)
     //console.log("Arguments: " + arguments.toString().toLowerCase())
     //console.log("User: " + user)
 
@@ -108,10 +106,6 @@ function addCommand(arguments, msg) {
     console.log("Käyttäjä: " + msg.member.user.username + " Lisättävä: " + arguments
         + " Monta tulossa? " + arguments.length)
 
-    /*for (i in arguments) {
-        console.log(arguments[i].replace(/[,()]/g, '').replace(/[/]/g, ' '))
-    }*/
-
 
     for (i in arguments) {
         trades.addTrade({
@@ -123,20 +117,14 @@ function addCommand(arguments, msg) {
         }, { status: (errorCode) => ({ send: (errorMsg) => console.log("ERROR", errorCode, errorMsg) }) }
         );
     }
-
-
-
 }
 
 function deleteCommand(arguments, msg) {
 
-    //console.log(arguments)
     const id = arguments[0]
     const pokemon = ""
     const username = ""
     console.log("id: " + id)
-    //const delTrade = -1;
-    //console.log(msg)
 
     trades.getTrades({}, {
         send: tradeData => {
@@ -151,15 +139,6 @@ function deleteCommand(arguments, msg) {
 
     }
     )
-
-    // msg.channel.send("OK")
-    // console.log("Deltrades: " + delTrade)
-
-    //delTrade.map(id => delTrade.id)
-    /*trades.removeTrade({ id: id },
-        { status: (errorCode) => ({ send: (errorMsg) => console.log("ERROR", errorCode, errorMsg) }) }
-    )*/
-
 }
 
 function deleteTrade(id, msg, arguments) {
@@ -175,8 +154,4 @@ function deleteTrade(id, msg, arguments) {
         console.log("Tyhjä " + arguments)
         msg.channel.send("Ei löydy " + arguments)
     }
-    /*  */
 }
-
-
-

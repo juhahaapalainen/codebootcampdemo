@@ -36,10 +36,10 @@ const addTrade = (req, res) => {
 }
 
 const removeTrade = (req, res) => {
-    // console.log("req " + req.id)
+
     let id = -1;
     if (req.id === undefined) {
-        //console.log("req.id undefined " + req)
+
         id = req.params.id;
     }
     else {
@@ -64,31 +64,6 @@ const removeTrade = (req, res) => {
     }
 }
 
-
-/*const getTrades = (req, res) => res.send(tradeList);
-const addTrade = (req, res) => {
- 
-const trade = req.body;
-trade.id = (tradeList.slice(-1)[0] || {id: 0}).id + 1;
-tradeList.push(trade);
-res.send(trade);
-}
-
-const removeTrade = (req, res) => {
-const id = req.params.id;
-//  const index = fruitList.findIndex(fruit => fruit.id === parseInt(id));
-
-if(index > -1) {
-const removedTrade = tradeList.splice(index, 1);
-//console.log("ID", id);
-// res.send(removedFruit);
-}
-else{
-//return error
-res.status(404).send('Not found');
-}
-}
-*/
 module.exports = {
     getTrades,
     addTrade,

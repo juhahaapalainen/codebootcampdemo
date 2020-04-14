@@ -1,8 +1,6 @@
 import React from "react";
 import './AddTrade.css'
 
-
-
 export default class AddTrade extends React.Component {
     state = {
         username: "",
@@ -10,9 +8,6 @@ export default class AddTrade extends React.Component {
         info: "",
 
     }
-
-
-
 
     handleInputChange(event) {
         const target = event.target;
@@ -24,7 +19,7 @@ export default class AddTrade extends React.Component {
 
     onSave(event) {
         event.preventDefault();
-        //console.log("OnSaveevent: pokemon " +this.state.pokemon +" username: " +this.state.username)
+
         fetch('/api/trades', {
             method: 'POST',
             headers: {
