@@ -2,7 +2,7 @@ const express = require('express')
 const bodyParser = require('body-parser');
 const trades = require('./trades');
 const app = express()
-const JSONDB = require('node-json-db')
+//const JSONDB = require('node-json-db')
 const Discord = require('discord.js')
 //const request = require('request')
 app.use(bodyParser.json());
@@ -17,11 +17,11 @@ app.delete('/trades/:id', (req, res) => trades.removeTrade(req, res))
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
 
+var fs = require('fs');
+var key = fs.readFileSync('key.txt', 'utf8');
 
-const configDb = new JSONDB('config', true, true)
-const config = configDb.getData('/') || {}
 const client = new Discord.Client();
-client.login(configDb.getData('/key'));
+client.login(key);
 
 let tradeData = []
 
